@@ -1,1 +1,1 @@
-# orga_compu
+# Organización del computador
