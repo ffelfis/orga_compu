@@ -1,63 +1,26 @@
-\documentclass[a4paper, 12 pt]{article}
+\documentclass[a4paper, 10pt, twoside, notitlepage]{article}
 
-% PREÁMBULO
-% =============================================================================== %
-% GENERAL
-% =============================================================================== %
-
-\usepackage[margin = 2cm]{geometry} % landscape, showframe
-\usepackage[utf8]{inputenc}
+%idioma
 \usepackage[spanish]{babel}
-\usepackage{float}
-\usepackage{enumitem}    % - Para quitar separación entre ítems. Para agregar margen.
-%\usepackage{enumerate}    % - Para modificar el estilo (margen) de itemize y enumerados.
-            % enumerate es incompatible con enumitem.
-\usepackage{booktabs}    % - Para edición de tablas.
-\usepackage{multirow}
-%\setlength{\parskip}{8pt plus 4mm minus 3mm} % Espacio antes de párrafo.
+\usepackage[utf8x]{inputenc}
 
-% PARA DEFINIR ANCHO DE COLUMNAS ALIENADAS
-\usepackage{array}
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-% =============================================================================== %
-% METAMÁTICA
-% =============================================================================== %
-
+% matematica
 \usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage{amssymb}
 
-% =============================================================================== %
-% TIPOS
-% =============================================================================== %
+% estilo
+\usepackage[footnotesize]{caption}
+\usepackage[outer=2cm,inner=4cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{fancyhdr}
 
-%\usepackage{verbatim}
-\usepackage{fancyvrb}
+\usepackage{color,hyperref}
+\definecolor{black}{rgb}{0.0,0.0,0.0}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\definecolor{color_fondo}{rgb}{0.2, 0.2, 0.2}
+\definecolor{color_fuente}{rgb}{0.8, 0.8, 0.8}
 
-% =============================================================================== %
-% GRÁFICOS
-% =============================================================================== %
-
-\usepackage{graphicx}
-\usepackage{caption}    % para subfigure
-\usepackage{subcaption}    % para subfigure
-
-% =============================================================================== %
-% COLOR
-% =============================================================================== %
-
-\usepackage{xcolor}
-\definecolor{airforceblue}{rgb}{0.36 0.54 0.66}
-\definecolor{purpura}{rgb}{0.5 0. 0.5}
-\definecolor{azul}{rgb}{0.0 0.18 0.7}
-\definecolor{rojo}{rgb}{0.95 0.0 0.0}
-\definecolor{verde}{rgb}{0.0 0.5 0.0}
-\definecolor{color_fondo}{rgb}{0.2 0.2 0.2}
-\definecolor{color_fuente}{rgb}{0.8 0.8 0.8}
-\definecolor{gris}{rgb}{0.5 0.5 0.5}
-%\definecolor{}{rgb}{}
+\hypersetup{colorlinks,breaklinks,linkcolor=black,urlcolor=darkblue,anchorcolor=darkblue,citecolor=darkblue}
 
 % =============================================================================== %
 % COLOR DE PÁGINA
@@ -68,14 +31,7 @@
 \color{color_fuente}
 \pagecolor{color_fondo}
 
-% =============================================================================== %
-% MISCELÁNEOS
-% =============================================================================== %
 \pagenumbering{arabic}    % arabic, gobble
-
-% =============================================================================== %
-% ############################################################################### %
-% =============================================================================== %
 
 \title{
 	\textbf{Trabajo práctico 0}\\
