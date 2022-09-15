@@ -9,3 +9,5 @@ Desde la máquina local. Para copiar un archivo desde la máquina remota, la emu
 Desde la máquina local. Para copiar un archivo desde la máquina local hacia la máquina emulada:
 
 `$ scp -P 5555 ejemplo.txt root@localhost:/root/<directorio_destino>/`
+
+En este caso, esto funciona si  el archivo `ejemplo.txt` se encuentra en el direcorio desde el cual se ejecutan los comandos.
