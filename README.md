@@ -8,7 +8,7 @@ En la máquina virual (no desde una terminal local) ejecutar el comando:
 
 ## Desconexión de terminal local para máquina virtual
 
-Desde cualquier directorio de la mmáquina virtual:
+Desde cualquier directorio de la máquina virtual:
 
 `# logout`
 
