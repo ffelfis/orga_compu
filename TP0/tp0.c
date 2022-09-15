@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define error_cant_param "Cantidad incorrecta de argumentos"
@@ -10,8 +11,9 @@ void ayuda(){
 }
 
 // Función para mostrar error y salir
+// fprintf se usa para escribir en stderr
 void error(char *mensaje){
-    printf(stderr,"%s\n",mensaje);
+    fprintf(stderr,"%s\n",mensaje);
     exit(1);
 }
 
