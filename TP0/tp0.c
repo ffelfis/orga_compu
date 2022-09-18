@@ -30,8 +30,18 @@ void error(char *mensaje){
 int contar_caracteres(FILE *archivo){
     printf("Conteo de caracteres.\n");
 
+    char ch;
+    int contador = 0;
+
+    while ((ch = fgetc(archivo)) != EOF){
+        if ((ch != '\n') || (ch != ' ') || (ch != '\t') || (ch != '\0'))
+            contador++;
+    }
+
+    printf("%d\n", contador);
+
     fclose(archivo);
-    return 13;
+    return contador;
 }
 
 // Cuenta palabras
