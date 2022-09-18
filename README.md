@@ -1,5 +1,17 @@
 # Organización del computador
 
+## QEMU
+
+En una carpeta bajar los paquetes necesarios con los comandos:
+
+`user@user-PCName:~/qemu_dir$ wget https://people.debian.org/~jcowgill/qemu-mips/debian-stretch-mips.qcow2`
+
+`user@user-PCName:~/qemu_dir$ wget https://people.debian.org/~jcowgill/qemu-mips/initrd.img-4.9.0-4-5kc-malta.mips.stretch`
+
+`user@user-PCName:~/qemu_dir$ wget https://people.debian.org/~jcowgill/qemu-mips/vmlinux-4.9.0-4-5kc-malta.mips.stretch`
+
+También conviene agregar en la misma carpeta el archivo `start_qemu.sh`.
+
 ## Apagar la máquina virtual
 
 En la máquina virual (no desde una terminal local) ejecutar el comando:
