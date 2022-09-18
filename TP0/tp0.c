@@ -4,6 +4,7 @@
 
 #define error_cant_param "Cantidad incorrecta de argumentos"
 #define error_param_incorrectos "Las opciones ingresadas son incorrectas"
+#define error_archivo_inexistente "El archivo que intenta abrir no existe"
 #define mensaje_de_ayuda "Usage:\n \ttp0 -h\n\ttp0 -V\n\ttp0 [options] file\nOptions:\n\t-V, --version\t\tPrint version and quit.\n\t-h, --help\t\tPrint this information.\n\t-l, --lines\t\tPrint number of lines in file.\n\t-w, --words\t\tPrint number of words in files.\n\t-c, --characters\tPrint number of characters in file.\n\t-i, --input\t\tPath to input file.\nExamples:\n\n\ttp0 -w -i input.txt"
 #define version_num "tp0 v1.0"
 
@@ -25,12 +26,16 @@ void error(char *mensaje){
     // exit termina la ejecución del programa
 }
 
+// Cuenta caracteres
+int contar_caracteres(FILE *archivo){
+    printf("Conteo de caracteres.\n");
+}
+
 int main(int argc, char *argv[]){
 //argc -> argument count, argv -> argument vector
 
     // Puntero a archivo
     FILE *file;
-    char ch;
 
     // Verifica la cantidad de argumentos
     if (argc < 2 || argc > 4){
@@ -52,6 +57,20 @@ int main(int argc, char *argv[]){
         version();
         return 0;
     }
+
+    // // Verifica por pedido de caracteres en el primer argumento y entrada en el segundo argumento
+    else if ((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--characters") == 0) && ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
+        // Por si hay algo luego del nombre del archivo
+        if (argc != 4) error(error_cant_param);
+
+        // Se intenta abrir el archivo en modo lectura
+        file = fopen(argv[3], "r");
+        if (file == NULL) error(error_archivo_inexistente);
+
+        int num;
+        num = contar_caracteres(file);
+        return 0;
+    }    
 
     // Opciones ingresadas incorrectas
     else {
