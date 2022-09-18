@@ -29,16 +29,25 @@ void error(char *mensaje){
 // Cuenta caracteres
 int contar_caracteres(FILE *archivo){
     printf("Conteo de caracteres.\n");
+
+    fclose(archivo);
+    return 13;
 }
 
 // Cuenta palabras
 int contar_palabras(FILE *archivo){
     printf("Conteo de palabras.\n");
+
+    fclose(archivo);
+    return 18;
 }
 
 // Cuenta líneas
 int contar_lineas(FILE *archivo){
     printf("Conteo de líneas.\n");
+
+    fclose(archivo);
+    return 24;
 }
 
 int main(int argc, char *argv[]){
@@ -69,7 +78,8 @@ int main(int argc, char *argv[]){
     }
 
     // Verifica por pedido de caracteres en el primer argumento y entrada en el segundo argumento
-    else if (((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--characters") == 0)) && ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
+    else if (((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--characters") == 0)) && 
+             ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
         // Por si hay algo luego del nombre del archivo
         if (argc != 4) error(error_cant_param);
 
@@ -79,11 +89,13 @@ int main(int argc, char *argv[]){
 
         int num;
         num = contar_caracteres(file);
+        printf("%d\n", num);
         return 0;
     }
 
     // Verifica por pedido de palabras en el primer argumento y entrada en el segundo argumento
-    else if (((strcmp(argv[1], "-w") == 0) || (strcmp(argv[1], "--words") == 0)) && ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
+    else if (((strcmp(argv[1], "-w") == 0) || (strcmp(argv[1], "--words") == 0)) && 
+             ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
         // Por si hay algo luego del nombre del archivo
         if (argc != 4) error(error_cant_param);
 
@@ -93,11 +105,13 @@ int main(int argc, char *argv[]){
 
         int num;
         num = contar_palabras(file);
+        printf("%d\n", num);
         return 0;
     }
 
     // Verifica por pedido de líneas en el primer argumento y entrada en el segundo argumento
-    else if (((strcmp(argv[1], "-l") == 0) || (strcmp(argv[1], "--lines") == 0)) && ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
+    else if (((strcmp(argv[1], "-l") == 0) || (strcmp(argv[1], "--lines") == 0)) && 
+             ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
         // Por si hay algo luego del nombre del archivo
         if (argc != 4) error(error_cant_param);
 
@@ -107,6 +121,8 @@ int main(int argc, char *argv[]){
 
         int num;
         num = contar_lineas(file);
+        // Se convierte num a decimal
+        printf("%d\n", num);
         return 0;
     }     
 
