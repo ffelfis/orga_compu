@@ -1,0 +1,103 @@
+CARACTERES
+
+root@debian-stretch-mips:~/tp0# time ./tp0 -c -i beowulf.txt 
+Conteo de caracteres.
+224839
+224839
+
+real	0m0.197s
+user	0m0.188s
+sys	0m0.000s
+root@debian-stretch-mips:~/tp0# time ./tp0 -c -i elquijote.txt 
+Conteo de caracteres.
+2198907
+2198907
+
+real	0m1.333s
+user	0m1.320s
+sys	0m0.000s
+root@debian-stretch-mips:~/tp0# time ./tp0 -c -i alice.txt 
+Conteo de caracteres.
+177428
+177428
+
+real	0m0.175s
+user	0m0.156s
+sys	0m0.012s
+root@debian-stretch-mips:~/tp0# time ./tp0 -c -i cyclopedia.txt 
+Conteo de caracteres.
+658543
+658543
+
+real	0m0.469s
+user	0m0.448s
+sys	0m0.016s
+
+
+LÍNEAS
+
+root@debian-stretch-mips:~/tp0# time ./tp0 -l -i beowulf.txt 
+Conteo de líneas.
+4562
+4562
+
+real	0m0.247s
+user	0m0.232s
+sys	0m0.004s
+root@debian-stretch-mips:~/tp0# time ./tp0 -l -i elquijote.txt 
+Conteo de líneas.
+37862
+37862
+
+real	0m1.906s
+user	0m1.884s
+sys	0m0.012s
+root@debian-stretch-mips:~/tp0# time ./tp0 -l -i alice.txt 
+Conteo de líneas.
+4046
+4046
+
+real	0m0.170s
+user	0m0.156s
+sys	0m0.004s
+root@debian-stretch-mips:~/tp0# time ./tp0 -l -i cyclopedia.txt 
+Conteo de líneas.
+17926
+17926
+
+real	0m0.436s
+user	0m0.416s
+sys	0m0.008s
+
+
+PALABRAS
+
+root@debian-stretch-mips:~/tp0# time ./tp0 -w -i beowulf.txt 
+Cantidad de palabras: 37048
+18
+
+real	0m0.268s
+user	0m0.256s
+sys	0m0.004s
+root@debian-stretch-mips:~/tp0# time ./tp0 -w -i elquijote.txt 
+Cantidad de palabras: 384258
+18
+
+real	0m2.021s
+user	0m2.012s
+sys	0m0.004s
+root@debian-stretch-mips:~/tp0# time ./tp0 -w -i alice.txt 
+Cantidad de palabras: 30355
+18
+
+real	0m0.202s
+user	0m0.180s
+sys	0m0.016s
+root@debian-stretch-mips:~/tp0# time ./tp0 -w -i cyclopedia.txt 
+Cantidad de palabras: 105582
+18
+
+real	0m0.535s
+user	0m0.516s
+sys	0m0.016s
+
