@@ -55,9 +55,21 @@ int contar_palabras(FILE *archivo){
 // Cuenta líneas
 int contar_lineas(FILE *archivo){
     printf("Conteo de líneas.\n");
+    
+    char ch;
+    int contador = 0;
+
+    while ((ch = fgetc(archivo)) != EOF){
+        if (ch == '\n'){
+            contador++;
+        }
+
+    }
+
+    printf("%d\n", contador);
 
     fclose(archivo);
-    return 24;
+    return contador;
 }
 
 int main(int argc, char *argv[]){
