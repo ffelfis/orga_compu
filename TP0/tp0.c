@@ -26,6 +26,122 @@ void error(char *mensaje){
     // exit termina la ejecución del programa
 }
 
+char * string_token(char *str,const char *delim,char **temp)
+{
+	register char *tok;
+
+	if(str!=NULL)
+	{
+		for(tok=str;*tok;tok++)
+			if(strchr(delim,*tok)!=NULL)
+				break;
+		if(!(*tok))
+			*temp=tok;
+		else{
+			*tok='\0';
+			*temp=tok+1;
+		}
+	}else{
+		if(!(**temp))
+			return NULL;
+		str=*temp;
+		for(tok=str;*tok;tok++)
+			if(strchr(delim,*tok)!=NULL)
+				break;
+
+		if(!(*tok)){
+			*temp=tok;
+			return str;
+		}else{
+			*tok='\0';
+			*temp=tok+1;
+		}
+	}
+	return str;
+}
+
+char * clone_string (const char * orig)
+{
+	size_t len=0;
+	size_t i=0;
+    char * clone=NULL;
+
+	if(orig==NULL )
+		NULL;
+
+	len=strlen(orig);
+
+	if((clone=(char *)malloc(sizeof(char)*(len+1)))==NULL)
+		NULL;
+	
+	for(i=0;i<=len;i++)
+		clone[i]=orig[i];
+
+	return clone;
+}
+
+void destroy_string (char *str){
+
+	if(str==NULL)
+		return;
+	free(str);
+	return;
+}
+
+void destroy_string_array(char **str_arr, size_t len)
+{
+	size_t i=0;
+
+	if(str_arr==NULL)
+		return;
+
+	for(i = 0; i < len; i++)
+	{
+		free(str_arr[i]);
+		str_arr[i] = NULL;
+	}
+	free(str_arr);
+	str_arr=NULL;
+	return;
+}
+
+char ** split_string(char * str,char * delim, size_t *len)
+{
+	char *dup, *q, *p,*temp;
+	size_t n, i;
+    char ** str_arr;
+
+	if(str==NULL || delim==NULL || len==NULL)
+		return NULL;
+
+	if((dup=clone_string(str))==NULL)
+		return NULL;
+
+	for(n=0,i=0;dup[i];i++)
+		if(strchr(delim,dup[i])!=NULL)
+			n++;
+
+	if((str_arr=(char **)malloc(sizeof(char*)*(n+1)))==NULL){
+		destroy_string(dup);
+		*len=0;
+		return NULL;
+	}
+	for(i=0,q=dup;(p= string_token(q,delim,&temp))!=NULL;q=NULL,i++)
+	{
+		if((str_arr[i] =clone_string(p)) ==NULL)
+		{
+			destroy_string_array(str_arr, i);
+			destroy_string(dup);
+			*len=0;
+			return NULL;
+		}
+	}
+	destroy_string(dup);
+	*len=i;
+	return str_arr;
+}
+
+
 // Cuenta caracteres
 int contar_caracteres(FILE *archivo){
     printf("Conteo de caracteres.\n");
@@ -46,9 +162,23 @@ int contar_caracteres(FILE *archivo){
 
 // Cuenta palabras
 int contar_palabras(FILE *archivo){
-    printf("Conteo de palabras.\n");
+    char linea[100 + 1];
+    int i, cantidad_palabras = 0;
+    char ** string_array=NULL;
+    size_t len=0;
+    char *delim= " \t\n\r";
 
-    fclose(archivo);
+    while (fgets(linea, 300, archivo) != NULL) {
+        string_array=split_string(linea,delim, &len);
+        for(i=0;i<len;i++){
+            if(strlen(string_array[i])>0)
+            cantidad_palabras++;
+        }
+    destroy_string_array(string_array,len);
+    len=0;           
+    }    
+    printf("Cantidad de palabras: %d\n", cantidad_palabras);
+
     return 18;
 }
 
