@@ -57,9 +57,9 @@ En el final del archivo agregar la línea `PermitRootLogin yes` y reiniciar el s
 # service sshd restart
 ```
 
-## Apagar la máquina virtual
+## Apagado de la máquina virtual
 
-En la máquina virual (no desde una terminal local) ejecutar el comando:
+En la máquina virtual (no desde una terminal local) ejecutar el comando:
 
 `# shutdown -h now`
 
