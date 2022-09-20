@@ -1,0 +1,5 @@
+Nombre	Cantidad	Real	Usuario	Sistema
+beowulf	224839	0.197	0.188	0.000
+elquijote	2198907	1.333	1.320	0.000
+alice	177428	0.175	0.156	0.012
+cyclopedia	658543	0.469	0.448	0.016
