@@ -224,7 +224,7 @@ int main(int argc, char *argv[]){
 
     // Verifica por pedido de caracteres en el primer argumento y entrada en el segundo argumento
     else if (((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--characters") == 0)) && 
-             ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
+             ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0))){
         // Por si hay algo luego del nombre del archivo
         if (argc != 4) error(error_cant_param);
 
@@ -240,7 +240,7 @@ int main(int argc, char *argv[]){
 
     // Verifica por pedido de palabras en el primer argumento y entrada en el segundo argumento
     else if (((strcmp(argv[1], "-w") == 0) || (strcmp(argv[1], "--words") == 0)) && 
-             ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
+             ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0))){
         // Por si hay algo luego del nombre del archivo
         if (argc != 4) error(error_cant_param);
 
