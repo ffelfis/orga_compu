@@ -1,0 +1,120 @@
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#gcc -Wall -g -o tp0 tp0.c
+
+HELP
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 --help
+Usage:
+ 	tp0 -h
+	tp0 -V
+	tp0 [options] file
+Options:
+	-V, --version		Print version and quit.
+	-h, --help		Print this information.
+	-l, --lines		Print number of lines in file.
+	-w, --words		Print number of words in files.
+	-c, --characters	Print number of characters in file.
+	-i, --input		Path to input file.
+Examples:
+
+	tp0 -w -i input.txt
+
+real	0m0.100s
+user	0m0.064s
+sys	m0.036s
+
+
+
+
+VERSION
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -V
+tp0 v1.0
+
+real	0m0.090s
+user	0m0.068s
+sys	0m0.020s
+
+
+
+CARACTERES
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -c -i beowulf.txt
+224839 beowulf.txt
+
+real	0m0.326s
+user	0m0.296s
+sys	0m0.024s
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -c -i elquijote.txt
+2198907 elquijote.txt
+
+real	0m1.717s
+user	0m1.672s
+sys	0m0.044s
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -c -i alice.txt
+177428 alice.txt
+
+real	0m0.303s
+user	0m0.288s
+sys	0m0.012s
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -c -i cyclopedia.txt
+658543 cyclopedia.txt
+
+real	0m0.638s
+user	0m0.616s
+sys	0m0.020s
+
+
+
+LINEAS
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -l -i beowulf.txt
+4562 beowulf.txt
+
+real	0m0.356s
+user	0m0.324s
+sys	0m0.028s
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -l -i elquijote.txt
+37862 elquijote.txt
+
+real	0m1.445s
+user	0m1.400s
+sys	0m0.044s
+
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -l -i alice.txt
+4046 alice.txt
+
+real	0m0.298s
+user	0m0.268s
+sys	0m0.028s
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -l -i cyclopedia.txt
+17926 cyclopedia.txt
+
+real	0m0.531s
+user	0m0.480s
+sys	0m0.048s
+
+
+
+
+PALABRAS
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -w -i beowulf.txt
+37048 beowulf.txt
+
+real	0m0.377s
+user	0m0.348s
+sys	0m0.028s
+
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -w -i elquijote.txt
+384258 elquijote.txt
+
+real	0m2.303s
+user	0m2.260s
+sys	0m0.040s
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -w -i alice.txt
+30355 alice.txt
+
+real	0m0.327s
+user	0m0.296s
+sys	0m0.032s
+root@debian-stretch-mips:/home/Organizacion de Computadoras/orga_compu/TP0#time ./tp0 -w -i cyclopedia.txt
+105582 cyclopedia.txt
+
+real	0m0.749s
+user	0m0.724s
+sys	0m0.020s
