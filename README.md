@@ -63,15 +63,15 @@ En la máquina virtual (no desde una terminal local) ejecutar el comando:
 
 `# shutdown -h now`
 
-## Acceso a la máquina guest desde una terminal del sistema host
+## Acceso a la máquina virtual desde una terminal del sistema local
 
-En una terminal ejecutar:
+Con la máquina virtual iniciada con `root`, en una terminal del sistema local ejecutar:
 
 ```
 $ ssh root@localhost -p 5555
 ```
 
-Se pedirá la contraseña asignada a `root`.
+Se pedirá la contraseña asignada a `root`. Con la contraseña se obtiene el acceso a la línea de comandos de la máquina virtual en una terminal del sistema local.
 
 ## Desconexión de terminal local para máquina virtual
 
@@ -81,18 +81,27 @@ Desde cualquier directorio de la máquina virtual:
 # logout
 ```
 
+Una vez terminada la sesión hay que apagar la máquina virtual con `# shutdown -h now`.
+
 ## Copia de archivos
 
-Desde la máquina local. Para copiar un archivo desde la máquina remota, la emulada por QEMU, hacia la máquina local:
+La copia de archivos se puede realizar desde una __terminal del sistema local__.
+
+### Desde máquina virtual a sistema local
 
 `````
 $ scp -P 5555 root@localhost:/root/<ruta_fuente>/ejemplo.txt /home/<usuario>/<ruta_destino>/
 `````
 
-Desde la máquina local. Para copiar un archivo desde la máquina local hacia la máquina emulada:
+Notar las diferentes partes separadas por un espacio (`' '`):
+
+- `root@localhost:/root/<ruta_fuente>/ejemplo.txt` es la parte del archivo a copiar desde la máquina virtual.
+- `/home/<usuario>/<ruta_destino>/` es la ruta a la carpeta en el sistema local.
+
+### Desde sistema local a máquina virtual
 
 ```
 $ scp -P 5555 ejemplo.txt root@localhost:/root/<ruta_destino>/
 ```
 
-En este caso, esto funciona si  el archivo `ejemplo.txt` se encuentra en el directorio desde el cual se ejecutan los comandos.
+En este caso, esto funciona si  el archivo `ejemplo.txt` se encuentra en el directorio desde el cual se ejecutan los comandos. Aquí se especifica la ruta hacia el directorio a copiar el archivo en la máquina virtual con `root@localhost:/root/<ruta_destino>/`.
