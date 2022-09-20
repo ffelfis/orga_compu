@@ -144,7 +144,6 @@ char ** split_string(char * str,char * delim, size_t *len)
 
 // Cuenta caracteres
 int contar_caracteres(FILE *archivo){
-    printf("Conteo de caracteres.\n");
 
     char ch;
     int contador = 0;
@@ -153,8 +152,6 @@ int contar_caracteres(FILE *archivo){
         if ((ch != '\n') || (ch != ' ') || (ch != '\t') || (ch != '\0'))
             contador++;
     }
-
-    printf("%d\n", contador);
 
     fclose(archivo);
     return contador;
@@ -177,14 +174,12 @@ int contar_palabras(FILE *archivo){
     destroy_string_array(string_array,len);
     len=0;           
     }    
-    printf("Cantidad de palabras: %d\n", cantidad_palabras);
 
-    return 18;
+    return cantidad_palabras;
 }
 
 // Cuenta líneas
 int contar_lineas(FILE *archivo){
-    printf("Conteo de líneas.\n");
     
     char ch;
     int contador = 0;
@@ -195,8 +190,6 @@ int contar_lineas(FILE *archivo){
         }
 
     }
-
-    printf("%d\n", contador);
 
     fclose(archivo);
     return contador;
@@ -241,7 +234,7 @@ int main(int argc, char *argv[]){
 
         int num;
         num = contar_caracteres(file);
-        printf("%d\n", num);
+        printf("%d %s\n", num, argv[3]);
         return 0;
     }
 
@@ -257,7 +250,7 @@ int main(int argc, char *argv[]){
 
         int num;
         num = contar_palabras(file);
-        printf("%d\n", num);
+        printf("%d %s\n", num, argv[3]);
         return 0;
     }
 
@@ -274,7 +267,7 @@ int main(int argc, char *argv[]){
         int num;
         num = contar_lineas(file);
         // Se convierte num a decimal
-        printf("%d\n", num);
+        printf("%d %s\n", num, argv[3]);
         return 0;
     }     
 
