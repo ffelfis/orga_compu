@@ -1,0 +1,117 @@
+root@debian-stretch-mips:/tmp# gcc -Wall -g -o tp0 tp0.c
+
+HELP
+root@debian-stretch-mips:/tmp# time ./tp0 --help
+Usage:
+ 	tp0 -h
+	tp0 -V
+	tp0 [options] file
+Options:
+	-V, --version		Print version and quit.
+	-h, --help		Print this information.
+	-l, --lines		Print number of lines in file.
+	-w, --words		Print number of words in files.
+	-c, --characters	Print number of characters in file.
+	-i, --input		Path to input file.
+Examples:
+
+	tp0 -w -i input.txt
+
+real	0m0.082s
+user	0m0.028s
+sys	0m0.036s
+
+
+
+VERSION
+root@debian-stretch-mips:/tmp# time ./tp0 -V
+tp0 v1.0
+
+real	0m0.074s
+user	0m0.040s
+sys	0m0.024s
+
+
+
+CARACTERES
+root@debian-stretch-mips:/tmp# time ./tp0 -c -i beowulf.txt
+224839 beowulf.txt
+
+real	0m0.127s
+user	0m0.100s
+sys	0m0.016s
+root@debian-stretch-mips:/tmp# time ./tp0 -c -i elquijote.txt
+2198907 elquijote.txt
+
+real	0m1.361s
+user	0m1.312s
+sys	0m0.036s
+root@debian-stretch-mips:/tmp# time ./tp0 -c -i alice.txt
+177428 alice.txt
+
+real	0m0.207s
+user	0m0.176s
+sys	0m0.020s
+root@debian-stretch-mips:/tmp# time ./tp0 -c -i cyclopedia.txt
+658543 cyclopedia.txt
+
+real	0m0.384s
+user	0m0.348s
+sys	0m0.028s
+
+
+
+LINEAS
+root@debian-stretch-mips:/tmp# time ./tp0 -l -i beowulf.txt
+4562 beowulf.txt
+
+real	0m0.192s
+user	0m0.152s
+sys	0m0.032s
+root@debian-stretch-mips:/tmp# time ./tp0 -l -i elquijote.txt
+37862 elquijote.txt
+
+real	0m1.173s
+user	0m1.120s
+sys	0m0.048s
+root@debian-stretch-mips:/tmp# time ./tp0 -l -i alice.txt
+4046 alice.txt
+
+real	0m0.138s
+user	0m0.096s
+sys	0m0.032s
+root@debian-stretch-mips:/tmp# time ./tp0 -l -i cyclopedia.txt
+17926 cyclopedia.txt
+
+real	0m0.327s
+user	0m0.316s
+sys	0m0.004s
+
+
+
+PALABRAS
+root@debian-stretch-mips:/tmp# time ./tp0 -w -i beowulf.txt
+37048 beowulf.txt
+
+real	0m0.228s
+user	0m0.200s
+sys	0m0.020s
+root@debian-stretch-mips:/tmp# time ./tp0 -w -i elquijote.txt
+384258 elquijote.txt
+
+real	0m1.044s
+user	0m1.016s
+sys	0m0.020s
+root@debian-stretch-mips:/tmp# time ./tp0 -w -i alice.txt
+30355 alice.txt
+
+real	0m0.169s
+user	0m0.140s
+sys	0m0.020s
+root@debian-stretch-mips:/tmp# time ./tp0 -w -i cyclopedia.txt
+105582 cyclopedia.txt
+
+real	0m0.616s
+user	0m0.584s
+sys	0m0.020s
+
