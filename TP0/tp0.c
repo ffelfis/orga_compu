@@ -125,7 +125,8 @@ char ** split_string(char * str,char * delim, size_t *len)
 		if(strchr(delim,dup[i])!=NULL)
 			n++;
 
-	if((str_arr=(char **)malloc(sizeof(char*)*(n+1)))==NULL){
+	if((str_arr=(char **)malloc(sizeof(char*)*(n+1)))==NULL)
+    {
 		destroy_string(dup);
 		*len=0;
 		return NULL;
@@ -192,12 +193,13 @@ int contar_lineas(FILE *archivo)
     char ch;
     int contador = 0;
 
-    while ((ch = fgetc(archivo)) != EOF){
-        if (ch == '\n'){
+    while ((ch = fgetc(archivo)) != EOF)
+    {
+        if (ch == '\n')
+        {
             contador++;
         }
     }
-
     fclose(archivo);
     return contador;
 }
