@@ -14,19 +14,20 @@ void ayuda()
     printf("%s\n",mensaje_de_ayuda);
 }
 
-// Muestra la version del programa
+// Muestra la versión del programa
 void version()
 {
     printf("%s\n",version_num);
 }
 
-// Muestra error y termina ejecucion
+// Muestra error y termina ejecución
 void error(char *mensaje)
 {
     fprintf(stderr,"%s\n",mensaje);
     // fprintf se usa para escribir en stderr
-    exit(0);
-    // exit termina la ejecucion del programa
+    exit(1);
+    // exit termina la ejecución del programa
+    // en lugar de return 1, lo hace fuera de main
 }
 
 char * string_token(char *str,const char *delim,char **temp)
@@ -185,7 +186,7 @@ int contar_palabras(FILE *archivo)
     return cantidad_palabras;
 }
 
-// Cuenta lineas
+// Cuenta líneas
 int contar_lineas(FILE *archivo)
 {    
     char ch;
@@ -223,7 +224,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    // Verifica por pedido de version en el argumento 2
+    // Verifica por pedido de versión en el argumento 2
     else if ((strcmp(argv[1], "-V") == 0) || (strcmp(argv[1], "--version") == 0))
     {
         // Verifica que la cantidad de argumentos sea 2
