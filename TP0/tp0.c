@@ -13,17 +13,17 @@ void ayuda(){
     printf("%s\n",mensaje_de_ayuda);
 }
 
-// Muestra la versión del programa
+// Muestra la version del programa
 void version(){
     printf("%s\n",version_num);
 }
 
-// Muestra error y termina ejecución
+// Muestra error y termina ejecucion
 void error(char *mensaje){
     fprintf(stderr,"%s\n",mensaje);
     // fprintf se usa para escribir en stderr
     exit(0);
-    // exit termina la ejecución del programa
+    // exit termina la ejecucion del programa
 }
 
 char * string_token(char *str,const char *delim,char **temp)
@@ -178,7 +178,7 @@ int contar_palabras(FILE *archivo){
     return cantidad_palabras;
 }
 
-// Cuenta líneas
+// Cuenta lineas
 int contar_lineas(FILE *archivo){
     
     char ch;
@@ -188,7 +188,6 @@ int contar_lineas(FILE *archivo){
         if (ch == '\n'){
             contador++;
         }
-
     }
 
     fclose(archivo);
@@ -206,26 +205,26 @@ int main(int argc, char *argv[]){
         error(error_cant_param);
     }
 
-    // Verifica por pedido de ayuda en el primer argumento
+    // Verifica por pedido de ayuda en el argumento 1
     else if ((strcmp(argv[1], "-h") == 0) || (strcmp(argv[1], "--help") == 0)){
-        // Por si hay algo luego del pedido de ayuda
+        // Verifica que la cantidad de argumentos sea 2
         if (argc != 2) error(error_cant_param);
         ayuda();
         return 0;
     }
 
-    // Verifica por pedido de versión en el primer argumento
+    // Verifica por pedido de version en el argumento 2
     else if ((strcmp(argv[1], "-V") == 0) || (strcmp(argv[1], "--version") == 0)){
-        // Por si hay algo luego del pedido de versión
+        // Verifica que la cantidad de argumentos sea 2
         if (argc != 2) error(error_cant_param);
         version();
         return 0;
     }
 
-    // Verifica por pedido de caracteres en el primer argumento y entrada en el segundo argumento
+    // Verifica por pedido de caracteres en el argumento 1 y entrada en el argumento 2
     else if (((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--characters") == 0)) && 
              ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0))){
-        // Por si hay algo luego del nombre del archivo
+        // Verifica que la cantidad de argumentos sea 4
         if (argc != 4) error(error_cant_param);
 
         // Se intenta abrir el archivo en modo lectura
@@ -238,10 +237,10 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    // Verifica por pedido de palabras en el primer argumento y entrada en el segundo argumento
+    // Verifica por pedido de palabras en el argumento 1 y entrada en el argumento 2
     else if (((strcmp(argv[1], "-w") == 0) || (strcmp(argv[1], "--words") == 0)) && 
              ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0))){
-        // Por si hay algo luego del nombre del archivo
+        // Verifica que la cantidad de argumentos sea 4
         if (argc != 4) error(error_cant_param);
 
         // Se intenta abrir el archivo en modo lectura
@@ -254,10 +253,10 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    // Verifica por pedido de líneas en el primer argumento y entrada en el segundo argumento
+    // Verifica por pedido de líneas en el argumento 1 y entrada en el argumento 2
     else if (((strcmp(argv[1], "-l") == 0) || (strcmp(argv[1], "--lines") == 0)) && 
              ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
-        // Por si hay algo luego del nombre del archivo
+        // Verifica que la cantidad de argumentos sea 4
         if (argc != 4) error(error_cant_param);
 
         // Se intenta abrir el archivo en modo lectura
@@ -266,12 +265,11 @@ int main(int argc, char *argv[]){
 
         int num;
         num = contar_lineas(file);
-        // Se convierte num a decimal
         printf("%d %s\n", num, argv[3]);
         return 0;
     }     
 
-    // Opciones ingresadas incorrectas
+    // Salida por opciones ingresadas incorrectas
     else {
         error(error_param_incorrectos);
     }
