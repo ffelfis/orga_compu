@@ -9,17 +9,20 @@
 #define version_num "tp0 v1.0"
 
 // Muestra ayuda
-void ayuda(){
+void ayuda()
+{
     printf("%s\n",mensaje_de_ayuda);
 }
 
 // Muestra la version del programa
-void version(){
+void version()
+{
     printf("%s\n",version_num);
 }
 
 // Muestra error y termina ejecucion
-void error(char *mensaje){
+void error(char *mensaje)
+{
     fprintf(stderr,"%s\n",mensaje);
     // fprintf se usa para escribir en stderr
     exit(0);
@@ -80,8 +83,8 @@ char * clone_string (const char * orig)
 	return clone;
 }
 
-void destroy_string (char *str){
-
+void destroy_string (char *str)
+{
 	if(str==NULL)
 		return;
 	free(str);
@@ -143,12 +146,13 @@ char ** split_string(char * str,char * delim, size_t *len)
 
 
 // Cuenta caracteres
-int contar_caracteres(FILE *archivo){
-
+int contar_caracteres(FILE *archivo)
+{
     char ch;
     int contador = 0;
 
-    while ((ch = fgetc(archivo)) != EOF){
+    while ((ch = fgetc(archivo)) != EOF)
+    {
         if ((ch != '\n') || (ch != ' ') || (ch != '\t') || (ch != '\0'))
             contador++;
     }
@@ -158,16 +162,19 @@ int contar_caracteres(FILE *archivo){
 }
 
 // Cuenta palabras
-int contar_palabras(FILE *archivo){
+int contar_palabras(FILE *archivo)
+{
     char linea[100 + 1];
     int i, cantidad_palabras = 0;
     char ** string_array=NULL;
     size_t len=0;
     char *delim= " \t\n\r";
 
-    while (fgets(linea, 300, archivo) != NULL) {
+    while (fgets(linea, 300, archivo) != NULL)
+    {
         string_array=split_string(linea,delim, &len);
-        for(i=0;i<len;i++){
+        for(i=0;i<len;i++)
+        {
             if(strlen(string_array[i])>0)
             cantidad_palabras++;
         }
@@ -179,8 +186,8 @@ int contar_palabras(FILE *archivo){
 }
 
 // Cuenta lineas
-int contar_lineas(FILE *archivo){
-    
+int contar_lineas(FILE *archivo)
+{    
     char ch;
     int contador = 0;
 
@@ -194,19 +201,22 @@ int contar_lineas(FILE *archivo){
     return contador;
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
 //argc -> argument count, argv -> argument vector
 
     // Puntero a archivo
     FILE *file;
 
     // Verifica la cantidad de argumentos
-    if (argc < 2 || argc > 4){
+    if (argc < 2 || argc > 4)
+    {
         error(error_cant_param);
     }
 
     // Verifica por pedido de ayuda en el argumento 1
-    else if ((strcmp(argv[1], "-h") == 0) || (strcmp(argv[1], "--help") == 0)){
+    else if ((strcmp(argv[1], "-h") == 0) || (strcmp(argv[1], "--help") == 0))
+    {
         // Verifica que la cantidad de argumentos sea 2
         if (argc != 2) error(error_cant_param);
         ayuda();
@@ -214,7 +224,8 @@ int main(int argc, char *argv[]){
     }
 
     // Verifica por pedido de version en el argumento 2
-    else if ((strcmp(argv[1], "-V") == 0) || (strcmp(argv[1], "--version") == 0)){
+    else if ((strcmp(argv[1], "-V") == 0) || (strcmp(argv[1], "--version") == 0))
+    {
         // Verifica que la cantidad de argumentos sea 2
         if (argc != 2) error(error_cant_param);
         version();
@@ -223,7 +234,8 @@ int main(int argc, char *argv[]){
 
     // Verifica por pedido de caracteres en el argumento 1 y entrada en el argumento 2
     else if (((strcmp(argv[1], "-c") == 0) || (strcmp(argv[1], "--characters") == 0)) && 
-             ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0))){
+             ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0)))
+    {
         // Verifica que la cantidad de argumentos sea 4
         if (argc != 4) error(error_cant_param);
 
@@ -239,7 +251,8 @@ int main(int argc, char *argv[]){
 
     // Verifica por pedido de palabras en el argumento 1 y entrada en el argumento 2
     else if (((strcmp(argv[1], "-w") == 0) || (strcmp(argv[1], "--words") == 0)) && 
-             ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0))){
+             ((strcmp(argv[2], "-i") == 0) || (strcmp(argv[2], "--input") == 0)))
+    {
         // Verifica que la cantidad de argumentos sea 4
         if (argc != 4) error(error_cant_param);
 
@@ -255,7 +268,8 @@ int main(int argc, char *argv[]){
 
     // Verifica por pedido de líneas en el argumento 1 y entrada en el argumento 2
     else if (((strcmp(argv[1], "-l") == 0) || (strcmp(argv[1], "--lines") == 0)) && 
-             ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input")))){
+             ((strcmp(argv[2], "-i")) || (strcmp(argv[2], "--input"))))
+    {
         // Verifica que la cantidad de argumentos sea 4
         if (argc != 4) error(error_cant_param);
 
@@ -270,7 +284,8 @@ int main(int argc, char *argv[]){
     }     
 
     // Salida por opciones ingresadas incorrectas
-    else {
+    else
+    {
         error(error_param_incorrectos);
     }
 
