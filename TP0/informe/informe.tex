@@ -24,6 +24,39 @@
 \definecolor{darkblue}{rgb}{0.0,0.0,0.3}
 \definecolor{color_fondo}{rgb}{0.2, 0.2, 0.2}
 \definecolor{color_fuente}{rgb}{0.8, 0.8, 0.8}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95, 0.95, 0.92}
+
+%\lstdefinelanguage{C}
+%{
+%  morekeywords={from, import, def, return},
+%  morecomment=[l]{//},
+%  morestring=[b]",
+%  alsodigit={-},
+%  alsoletter={&}
+%}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                                  
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                	  
+    tabsize=2
+}
+
+\lstset{style=mystyle, language=C}
 
 \hypersetup{colorlinks,breaklinks,linkcolor=black,urlcolor=darkblue,anchorcolor=darkblue,citecolor=darkblue}
 
@@ -308,6 +341,45 @@ Se representó de manera gráfica la comparación de los tiempos encontrados par
 \newpage
 
 \section{Código fuente}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define error_cant_param "Cantidad incorrecta de argumentos"
+#define error_param_incorrectos "Las opciones ingresadas son incorrectas"
+#define error_archivo_inexistente "El archivo que intenta abrir no existe"
+#define mensaje_de_ayuda "Usage:\n \ttp0 -h\n
+\ttp0 -V\n\ttp0 [options] file\nOptions:\n
+\t-V, --version\t\tPrint version and quit.\n
+\t-h, --help\t\tPrint this information.\n
+\t-l, --lines\t\tPrint number of lines in file.\n
+\t-w, --words\t\tPrint number of words in files.\n
+\t-c, --characters\tPrint number of characters in file.\n
+\t-i, --input\t\tPath to input file.\n
+Examples:\n\n\ttp0 -w -i input.txt"
+#define version_num "tp0 v1.0"
+
+// Muestra ayuda
+void ayuda(){
+printf("%s\n",mensaje_de_ayuda);
+}
+
+// Muestra la version del programa
+void version(){
+printf("%s\n",version_num);
+}
+
+// Muestra error y termina ejecucion
+void error(char *mensaje){
+    fprintf(stderr,"%s\n",mensaje);
+    // fprintf se usa para escribir en stderr
+    exit(0);
+    // exit termina la ejecucion del programa
+}
+\end{lstlisting}
+
+
 \begin{verbatim}
     #include <stdio.h>
 #include <stdlib.h>
