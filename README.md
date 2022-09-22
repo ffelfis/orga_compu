@@ -26,6 +26,19 @@ En la máquina local, en la carpeta donde se encuentran los archivos descargados
 $ ./start_qemu.sh
 ```
 
+### Permiso para ejecutar `start_qemu`
+
+```
+$ ./start_qemu.sh
+bash: ./start_qemu.sh: Permission denied
+```
+
+En caso no tener permiso para correr el archivo bash, ejecutar:
+
+```
+$ chmod +x start_qemu.sh
+```
+
 ## Preparación del sistema guest
 
 Una vez encendida se ingresa con nombre de usuario `root`. Luego de iniciado el sistema ejecutar los siguientes comandos:
