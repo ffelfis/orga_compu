@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> // Uso de exit() [return fuera de main]
 #include <string.h> // Uso de strcmp() [compara strings]
-#include <stdbool.h> // Uso de [true, false]
-#include <ctype.h> // Uso de isspace() [chequea si es caracter]
 
 #define error_cant_param "Cantidad incorrecta de argumentos"
 #define error_param_incorrectos "Las opciones ingresadas son incorrectas"
@@ -32,6 +30,7 @@ void error(char *mensaje)
     // en lugar de return 1, lo hace fuera de main
 }
 
+/*La función string_token funciona igual que strtok. La cual busca en una cadena el o los delimitadores y lo reemplaza por un '\0' y guarda sobre la variable 'temp' la dirección del siguiente elemento al delimitador. Esta función es utilizada por split_string para separar la cadena en un arreglo de cadenas.*/
 char * string_token(char *str,const char *delim,char **temp)
 {
 	register char *tok;
@@ -68,6 +67,7 @@ char * string_token(char *str,const char *delim,char **temp)
 	return str;
 }
 
+/*clone_string clona una cadena en memoria dinámica y devuelve su direccion por el nombre*/
 char * clone_string (const char * orig)
 {
 	size_t len=0;
@@ -88,6 +88,7 @@ char * clone_string (const char * orig)
 	return clone;
 }
 
+/*destroy_string destruye una cadena dinámica*/
 void destroy_string (char *str)
 {
 	if(str==NULL)
@@ -96,6 +97,7 @@ void destroy_string (char *str)
 	return;
 }
 
+/*destroy_string_array destruye un arreglo de cadenas dinámicas*/
 void destroy_string_array(char **str_arr, size_t len)
 {
 	size_t i=0;
@@ -113,6 +115,7 @@ void destroy_string_array(char **str_arr, size_t len)
 	return;
 }
 
+/*split_string_array crea un arreglo de cadenas a partir de una cadena de caracteres. Esta se separa en función de el o los delimitadores que se le pasan a través de la variable 'delim'. Para esto crea un clon de la cadena original ya que para realizar esta separación se utiliza la función string_token la cual va modificando la cadena a ser separada para obtener el arreglo de cadenas. Al finalizar la separación de la cadena se elimina la copia y se devuelve por el nombre un puntero al arreglo de cadenas y por la interfaz la cantidad de cadenas que posee*/
 char ** split_string(char * str,char * delim, size_t *len)
 {
 	char *dup, *q, *p,*temp;
@@ -165,7 +168,7 @@ int contar_caracteres(FILE *archivo)
     return contador;
 }
 
-// Cuenta palabras
+/* Cuenta_palabras lee una linea de un archivo en un arreglo estático de longitud 300. Este arreglo se lo pasa a la función split_string_array para separar esa linea en palabras separadas por los token caracter espacio, tabulación, salto de linea y retorno de carro. Habiendo separado la cadena se tiene un arreglo de cadenas en string_array, esta entra en un ciclo 'for' y se pregunta cadena por cadena si su longitud es mayor a 0. De ser así esto significa que estamos en presencia de una palabra por lo que el contador se incrementa en 1. Una vez que se recorrió todo el arreglo de cadenas de caracteres, se lo elimina y se lee la siguiente linea del archivo la cual también se la utilizara para obtener un nuevo arreglo de cadena de caracteres. Este proceso se repite hasta que no queden mas lineas por leer en el archivo.*/
 int contar_palabras(FILE *archivo)
 {
     char linea[100 + 1];
