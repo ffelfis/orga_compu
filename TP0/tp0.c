@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stdlib.h> // Uso de exit() [return fuera de main]
+#include <string.h> // Uso de strcmp() [compara strings]
+#include <stdbool.h> // Uso de [true, false]
+#include <ctype.h> // Uso de isspace() [chequea si es caracter]
 
 #define error_cant_param "Cantidad incorrecta de argumentos"
 #define error_param_incorrectos "Las opciones ingresadas son incorrectas"
@@ -30,123 +32,6 @@ void error(char *mensaje)
     // en lugar de return 1, lo hace fuera de main
 }
 
-char * string_token(char *str,const char *delim,char **temp)
-{
-	register char *tok;
-
-	if(str!=NULL)
-	{
-		for(tok=str;*tok;tok++)
-			if(strchr(delim,*tok)!=NULL)
-				break;
-		if(!(*tok))
-			*temp=tok;
-		else{
-			*tok='\0';
-			*temp=tok+1;
-		}
-	}else{
-		if(!(**temp))
-			return NULL;
-		str=*temp;
-		for(tok=str;*tok;tok++)
-			if(strchr(delim,*tok)!=NULL)
-				break;
-
-		if(!(*tok)){
-			*temp=tok;
-			return str;
-		}else{
-			*tok='\0';
-			*temp=tok+1;
-		}
-	}
-	return str;
-}
-
-char * clone_string (const char * orig)
-{
-	size_t len=0;
-	size_t i=0;
-    char * clone=NULL;
-
-	if(orig==NULL )
-		NULL;
-
-	len=strlen(orig);
-
-	if((clone=(char *)malloc(sizeof(char)*(len+1)))==NULL)
-		NULL;
-	
-	for(i=0;i<=len;i++)
-		clone[i]=orig[i];
-
-	return clone;
-}
-
-void destroy_string (char *str)
-{
-	if(str==NULL)
-		return;
-	free(str);
-	return;
-}
-
-void destroy_string_array(char **str_arr, size_t len)
-{
-	size_t i=0;
-
-	if(str_arr==NULL)
-		return;
-
-	for(i = 0; i < len; i++)
-	{
-		free(str_arr[i]);
-		str_arr[i] = NULL;
-	}
-	free(str_arr);
-	str_arr=NULL;
-	return;
-}
-
-char ** split_string(char * str,char * delim, size_t *len)
-{
-	char *dup, *q, *p,*temp;
-	size_t n, i;
-    char ** str_arr;
-
-	if(str==NULL || delim==NULL || len==NULL)
-		return NULL;
-
-	if((dup=clone_string(str))==NULL)
-		return NULL;
-
-	for(n=0,i=0;dup[i];i++)
-		if(strchr(delim,dup[i])!=NULL)
-			n++;
-
-	if((str_arr=(char **)malloc(sizeof(char*)*(n+1)))==NULL)
-    {
-		destroy_string(dup);
-		*len=0;
-		return NULL;
-	}
-	for(i=0,q=dup;(p= string_token(q,delim,&temp))!=NULL;q=NULL,i++)
-	{
-		if((str_arr[i] =clone_string(p)) ==NULL)
-		{
-			destroy_string_array(str_arr, i);
-			destroy_string(dup);
-			*len=0;
-			return NULL;
-		}
-	}
-	destroy_string(dup);
-	*len=i;
-	return str_arr;
-}
-
-
 // Cuenta caracteres
 int contar_caracteres(FILE *archivo)
 {
@@ -164,27 +49,40 @@ int contar_caracteres(FILE *archivo)
 }
 
 // Cuenta palabras
-int contar_palabras(FILE *archivo)
-{
-    char linea[100 + 1];
-    int i, cantidad_palabras = 0;
-    char ** string_array=NULL;
-    size_t len=0;
-    char *delim= " \t\n\r";
+int contar_palabras(FILE *archivo){
 
-    while (fgets(linea, 300, archivo) != NULL)
+    char ch;
+    int contador = 0;
+    // white space: espacio, tabulación, salto de línea
+    bool white_space = true;
+    // white_space se usa para comparar contra caracteres.
+    // En rigor se usa para mantener un seguimiento de lo que
+    // se estaba leyendo entre espacios blancos y [no espacios blancos]
+    // Si se lee espacio blanco:
+    //      white_space = true
+    // Si se lee algo que no es espacio blanco
+    //      white_space = false
+    
+    while ((ch = fgetc(archivo)) != EOF)
     {
-        string_array=split_string(linea,delim, &len);
-        for(i=0;i<len;i++)
+        if (white_space && !isspace(ch))
         {
-            if(strlen(string_array[i])>0)
-            cantidad_palabras++;
+            // Si (espacio blanco && no espacio blanco)
+            // Cambio a caracter. INICIO DE NUEVA PALABRA.
+            contador++; // Cuenta palabra
+            // Ahora se está leyendo algo [no espacio blanco]
+            white_space = false;
         }
-    destroy_string_array(string_array,len);
-    len=0;           
-    }    
+        else if (!white_space && isspace(ch))
+        {
+            // Si (no espacio blanco && espacio blanco)
+            // Cambio a espacio blanco. TERMINA LA PALABRA
+            white_space = true;
+        }
+    }
 
-    return cantidad_palabras;
+    fclose(archivo);
+    return contador;
 }
 
 // Cuenta líneas
