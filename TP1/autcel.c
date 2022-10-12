@@ -14,18 +14,6 @@ void error(char *mensaje)
 	exit(1);
 }
 
-/* Ayuda */
-void ayuda()
-{
-	printf("%s\n", mensaje_ayuda);
-}
-
-/* Versión */
-void version()
-{
-	printf("%s\n", mensaje_version);
-}
-
 int main(int argc, char *argv[])
 {
 	/* Verificación inicial de argumentos */
@@ -39,7 +27,7 @@ int main(int argc, char *argv[])
 	{
 		/* Verifica que la cantidad de argumentos sea 2 */
         if (argc != 2) error(error_cant_param);
-        ayuda();
+        printf("%s\n", mensaje_ayuda);
         return 0;
 	}
 
@@ -48,7 +36,7 @@ int main(int argc, char *argv[])
 	{
 		/* Verifica que la cantidad de argumentos sea 2 */
         if (argc != 2) error(error_cant_param);
-        version(mensaje_version);
+        printf("%s\n", mensaje_version);
         return 0;
 	}
 
