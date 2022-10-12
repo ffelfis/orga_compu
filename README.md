@@ -28,12 +28,14 @@ $ ./start_qemu.sh
 
 ### Permiso para ejecutar `start_qemu`
 
+Desde el directorio de los archivos pertientes.
+
 ```
 $ ./start_qemu.sh
 bash: ./start_qemu.sh: Permission denied
 ```
 
-En caso no tener permiso para correr el archivo bash, ejecutar:
+En caso no tener permiso para correr el archivo bash, ejecutar en el directorio donde se encuentra `start_qemu.sh`:
 
 ```
 $ chmod +x start_qemu.sh
