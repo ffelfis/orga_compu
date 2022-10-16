@@ -35,6 +35,54 @@ int validateNum(char *palabra, char* mensaje_error)
 	return numero;
 }
 
+/*Abro y verifico que el archivo Seed existe: si existe devuelvo 1 y puntero
+a archivo x parámetro, si no existe devuelvo 0*/
+int openSeedFile(const char* arg ,FILE* seedFile){
+	//Abro el archivo
+	if((seedFile = fopen(arg, "r"))){
+		return 0;
+	}
+	//printf("Error: El archivo no existe, ");
+	return 1;
+}
+
+
+void closeSeedFile(FILE* seedFile){
+	fclose(seedFile);
+}
+
+
+/* Validar que archivo semilla se encuentre en formato correcto */
+/* Si el archivo es correcto devuelve true, sino devuelve false*/
+bool validateSeed(FILE* seedFile, int* seed, int size){
+	char aux[size];
+
+	if(fgets(aux, size+1, seedFile)){
+		int i = 0;
+		//Chequeo si tengo valores numéricos
+		while( i<(size+1) && isdigit(aux[i])){
+			seed[i] = (int)aux[i] - '0';
+			i++;
+		}
+
+		for(int j = 0; j<i; j++){
+			printf("%i", seed[j]);
+			}
+		printf("%c",'\n');
+
+		if(i<9){
+			printf("El archivo no tiene una semilla válida\n");
+			fclose(seedFile);
+			return false;
+		}
+		return true;
+	}
+
+	return false;
+}
+
+
+
 int main(int argc, char *argv[])
 {
 	int numRegla; /* Guardará el número de regla */
