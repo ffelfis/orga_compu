@@ -41,4 +41,4 @@ También se puede obtener un archivo con el código Assembly usando GCC.
 - `-S`: detiene al compilador luego de generar el assembly;
 - `-O0`: No aplica optimizaciones.
 
-Esto genera el archivo myprog.s con el assembly que gcc genera para `holamundo.c`.
+Esto genera el archivo `myprog.s` con el assembly que gcc genera para `holamundo.c`.
