@@ -9,7 +9,6 @@
 #define error_inval_celda "El número de celdas es inválido"
 #define error_archivo_inexistente "El archivo que intenta abrir no existe"
 #define error_prefijo_salida "Prefijo de salida inválido"
-//#define error_formato_archivo "El formato del archivo o número de celdas es incorrecto"
 #define mensaje_ayuda "Uso:\n\tautcel -h\n\tautcel -V\n\tautcel R N inputfile [-o outputprefix]\nOpciones:\n\t-h, --help\tImprime este mensaje.\n\t-V, --version\tDa la version del programa.\n\t-o\t\tPrefijo de los archivos de salida.\nEjemplos:\n\tautcel 30 80 inicial -o evolucion\n\tCalcula la evolución del autómata \"Regla 30\",\n\ten un mundo unidimensional de 80 celdas, por 80 iteraciones.\n\tEl archivo de salida se llamará evolucion.pbm.\n\tSi no se da un prefijo para los archivos de salida,\n\tel prefijo será el nombre del archivo de entrada."
 #define mensaje_version "autcel v1.0"
 
@@ -99,12 +98,12 @@ int main(int argc, char *argv[])
 			error(error_prefijo_salida);
 		}
 
-		/* Crear matrix de dimensión numCelda x numCelda */
-		printf("Crea la matriz\n");
+		/* Crea la matriz de dimensión numCelda x numCelda */
+		//printf("Crea la matriz\n");
 		unsigned char matriz[numCelda][numCelda];
 
-		/* Completar primera fila de matriz */
-		printf("Completa la fila 1\n");
+		/* Completa la primera fila de la matriz */
+		//printf("Completa la fila 1\n");
 		
 		/*  matriz: puntero a primer elemento de arreglo de 2 dimensiones */
 		/* *matriz: puntero a primer elemento de arreglo[numCelda] -> caracter */
@@ -113,13 +112,13 @@ int main(int argc, char *argv[])
 		fillRow1(file, ptr_matriz, numCelda);
 
 		/* IMPRIME PRIMERA FILA DE MATRIZ BORRAR */
-
+/*
 		for (int i=0; i<numCelda; i++)
 		{
 			printf("%c ", matriz[0][i]);
 		}
 		printf("\n");
-
+*/
 		/* Usar proximo() */
 		ptr_matriz = *matriz; /* Reset posición (0, 0)*/
 		/* numCelda-1 ya que la primer fila está completa */

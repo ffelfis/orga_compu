@@ -32,7 +32,7 @@ unsigned int validateNum(char *palabra, char* mensaje_error)
 	{
 		error(mensaje_error);
 	}
-	else printf("Función isValid: El número es válido.\n");
+	
 	return numero;
 }
 
@@ -109,32 +109,28 @@ unsigned char proximo(unsigned char *a, unsigned int i, unsigned int j, unsigned
 {
 	int divisiones = 0; 
 	unsigned char valor = regla;
-	int salto = N-1;
 
-	printf("Calculo de proximo: (%d, %d) ", i+1, j);
-
-	printf("cuenta: %d ", (*(a+2)-'0') * 4);
+	/* Hay que posicionar el puntero */
+	a = (a + (N*i)) + j; /* Mueve el puntero a la posición requrida */
 
 	if (j == 0)
 	{
-		divisiones = ((*(a+salto) - '0') * 4) + ((*a - '0') * 2) + ((*(a+1) - '0') * 1);
-		printf("ini ciclos: %d \n", divisiones);
+		divisiones = (*(a+N-1)-'0')*4 + (*a-'0')*2 + (*(a+1)-'0');
 	}
-	if (j == N-1)
+	else if (j == (N-1))
 	{
-		divisiones = ((*(a-1) - '0') * 4) + ((*a - '0') * 2) + ((*(a-salto) - '0') * 1);
-		printf("med ciclos: %d \n", divisiones);
+		divisiones = (*(a-1)-'0')*4 + (*a-'0')*2 + (*(a-N+1)-'0');
 	}
 	else
 	{
-		divisiones = ((*(a-1) - '0') * 4) + ((*a - '0') * 2) + ((*(a+1) - '0') * 1);
-		printf("fin ciclos: %d \n", divisiones);
+		divisiones = (*(a-1)-'0')*4 + (*a-'0')*2 + (*(a+1)-'0');
 	}
 
 	for (int k=0; k<divisiones; k++)
 	{
 		valor = valor / 2;
 	}
+	valor = valor % 2;
 
-	return (valor % 2);
+	return (unsigned char) valor + '0';
 }
