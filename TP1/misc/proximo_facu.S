@@ -41,72 +41,101 @@ proximo_ass:
 
 	move	t0, a3		/* valor = regla */
 	sw	t0, O_LTA_V(sp)
-
-	/* Programa */
-
-	/*====================================*/
-	/* Indice = 8 para pruebas ~~BORRAR~~ */
-	#add	t0, zero, zero
-	#addiu	t0, t0, 56
-	#sw	t0, O_LTA_I(sp)
-	/*====================================*/
 	
 /* UBICACION DEL PUNTERO */
 	
 	/* Necesito #fila y #columna para avanzar en memoria */
 
 	/* Carga del valor de la regla */
-	lw	t0, O_N(sp)	/* t0 <- MEM[sp + O_N]: N = #columnas */
+	lw	t3, O_N(sp)	/* t3 <- MEM[sp + O_N]: N = #columnas */
 
 	/* Multiplica numero de columnas por cantidad de filas */
-	multu	a1, t0		/* N*i resultado en LO */
+	multu	a1, t3		/* N*i resultado en LO */
 	mflo	t0		/* resultado */
 
 	/* Suma a la direccion de a0 la cantidad N*i */
 	/* Con esto se desplaza en filas */
-	#addu	t1, a0, t0	/* suma la direccion con N*i */
-	#lw 	t0, 0(t1)
+	la	t1, 0(a0)	/* carga direccion de (0,0)*/
+	addu	t1, t1, t0	/* suma direccion + (N*i) */
 
 	/* Suma a la direccion la cantidad j */ 
 	/* Con esto se desplaza en columnas */
-	#addu	t0, a2, t0	/* A lo anterior se le suma j */
+	addu	t1, t1, a2	/* suma (direccion + (N*i)) + j */
 
-	/* Se carga lo de la direccion de t0 */
-	#lw	t1, 0(t0)
+	/* Son bytes, de querer ver lo que hay en la direccion usar: lb */
+	#lb	t0, 0(t1) # se carga en t0 lo que hay en t1
 
 	/*=========================*/
-	move	t7, t0
+	#move	t7, t0
 	#addiu	t7, t7, 48 	/* Transformar en numero */
-	sw	t7, O_LTA_AUX(sp)
+	#addiu	t7, zero, 17	/* VALOR RARO tipo flag BORRAR */
+	#sw	t7, O_LTA_AUX(sp)
 	/*=========================*/
 
 /* Hasta aqui se tiene el puntero a la posicion indicada por (i,j) */
+/*								   */
+/*	       t1 tiene tiene la direccion: en posicion		   */
+/*=================================================================*/
 
 col_0:
 	bnez	a2, col_N	/* Si j no es 0 */
-
-	/*========================*/
-	#addiu 	t0, t0, 48	/* t0 <- t0 + 48 Visualiza numero */
-	#sw	t0, O_LTA_I(sp)
-	#sw	t1, O_LTA_I(sp)
-	/*========================*/
 	
+	#addiu 	t7, zero, 17
+	#sw	t7, O_LTA_AUX(sp)	
+		
+	/* Elemento siguiente */
+	addiu	t2, t1, 1	/* t2 <- t1 + 1: direccion de elemento siguiente */
+	
+
+	/* Elemento anterior */
+	subu 	t0, t3, 1	/* t0 <- t3 - 1: N-1 */
+	addu	t0, t1, t0	/* t0 <- t1 - t0: direccion - (N-1) */
+
+	#lb	t0, 0(t1)	/* t0 <- MEM[t1]: elemento central */
+	
+
+	#sw	t0, O_LTA_AUX(sp)
+
+
 	b	return		/* Ir al final */
+
 	
 col_N:
-	ld	t0, O_N(sp)	/* t0 <- MEM[sp + O_N]: N = #filas */
-	subu	t0, t0, 1	/* t0 <- N - 1 cuenta desde 0 */
-	bne	a2, t0, col_medio	/* Si j no es N-1 */
+	subu	t0, t1, 1	/* t0 <- t1 - 1: direccion elemento anteior */
+	subu	t4, t3, 1	/* t4 <- N - 1 cuenta desde 0 */
+	bne	a2, t4, col_medio	/* Si j no es N-1 */
+
+	subu	t2, t1, t4	/* t2 <- t1 - t4: direcicion centro - (N-1) */
 
 	b	return		/* Ir al final */
+
 
 col_medio:
+	addiu	t2, t1, 1	/* t2 <- t1 + 1: direccion elemento siguiente */
 
 	b	return		/* Ir al final */
 
+
 return:
+	
+	lb	t0, 0(t0)	/* t0 <- MEM[t0]: Elemento anterior */
+	sll	t0, t0, 2	/* t0 <- t0 * 4 */ 
+	lb	t1, 0(t1)	/* t1 <- MEM[t1]: Elemento central */
+	sll	t1, t1, 1	/* t1 <- t1 * 2 */
+	lb	t2, 0(t2)	/* t0 <- MEM[t2]: t2Elemento siguiente */
+	
+	addu	t0, t0, t1
+	addu	t0, t0, t2	/* posicion (indice) */
+
+	/* Regla en a3 */
+
+	srlv	t0, a3, t0	/* t0 <- a3 >> lo que indique t0 */
+	
+	andi	v0, t0, 1 	/* v0 <- t0 mod 2 */
+
 	/* return valor */
-	lw	v0, O_LTA_AUX(sp)
+	#lw	v0, O_LTA_AUX(sp)
+
 
 	/* Stack unwinding */
 	lw	fp, O_FP(sp)
