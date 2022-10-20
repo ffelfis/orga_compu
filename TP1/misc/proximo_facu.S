@@ -189,11 +189,25 @@ return:
 	#j 	salir
 
 
-	/* Regla en a3 */
-
+	/* Recordar: Regla en a3 */
+	
+	# =======
+	#sw	a3, O_LTA_AUX(sp)
+	#j	salir
+	
 	srlv	t0, a3, t0	/* t0 <- a3 >> lo que indique t0 */
 	
-	andi	v0, t0, 1 	/* v0 <- LSB de t0 */
+	# =======
+	#sw	t0, O_LTA_AUX(sp)
+	#j	salir
+	
+	#addiu	t0, t0, 48 	/* t0 <- t0 + 48: Pasa a caracter */
+	#andi	v0, t0, 1 	/* v0 <- LSB de t0 */
+	
+	andi	t0, t0, 1	/* t0 <- LSB de t0 */
+	addiu	t0, t0, 48	/* t0 <- t0 + 48: Pasa a caracter */
+
+	addu	v0, zero, t0	/* v0 <- zero + t0: Devuelve el caracter */
 
 	/* return valor */
 	#lw	v0, O_LTA_AUX(sp)
