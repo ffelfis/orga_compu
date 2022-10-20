@@ -84,18 +84,34 @@ col_0:
 	#sw	t7, O_LTA_AUX(sp)	
 		
 	/* Elemento siguiente */
-	addiu	t2, t1, 1	/* t2 <- t1 + 1: direccion de elemento siguiente */
+	addiu	t2, t1, 1	/* t2 <- t1 + 1: direccion de elemento siguiente */ 
 	
+	#addiu	t7, zero, 17
+	#lb	t7, 0(t2)
+	#sw	t7, O_LTA_AUX(sp)
+	#j	salir
+	
+	# ======= en t2 esta la direccion del elemento siguiente
+	#lb	t7, 0(t2)
+	#sw	t7, O_LTA_AUX(sp)
+	#j 	salir
+
+	# ANDA
+	#addu	t7, zero, zero
+	#lb	t7, 0(t2)
+	#sw	t7, O_LTA_AUX(sp)
+	#j	salir
+
 
 	/* Elemento anterior */
 	subu 	t0, t3, 1	/* t0 <- t3 - 1: N-1 */
 	addu	t0, t1, t0	/* t0 <- t1 - t0: direccion - (N-1) */
 
-	#lb	t0, 0(t1)	/* t0 <- MEM[t1]: elemento central */
-	
-
-	#sw	t0, O_LTA_AUX(sp)
-
+	# ANDA Tiene que ser 0: 48
+	#addu	t7, zero, zero
+	#lb	t7, 0(t0)
+	#sw	t7, O_LTA_AUX(sp)
+	#j	salir
 
 	b	return		/* Ir al final */
 
@@ -116,27 +132,74 @@ col_medio:
 	b	return		/* Ir al final */
 
 
-return:
-	
+salir:
+	addu	v0, zero, zero		/* Limpia el v0 */
+	lw	v0, O_LTA_AUX(sp)	/* devuelve lo que esta en AUX */
+	j	stack_end
+
+
+return:	
+/* Recordar que los elementos son caracteres ('1', '0') o (48, 49) */
+/* Hay que restar 48 */
+
 	lb	t0, 0(t0)	/* t0 <- MEM[t0]: Elemento anterior */
-	sll	t0, t0, 2	/* t0 <- t0 * 4 */ 
-	lb	t1, 0(t1)	/* t1 <- MEM[t1]: Elemento central */
-	sll	t1, t1, 1	/* t1 <- t1 * 2 */
-	lb	t2, 0(t2)	/* t0 <- MEM[t2]: t2Elemento siguiente */
+
+	# ======= elemento anterior
+	#sw	t0, O_LTA_AUX(sp)
+	#j	salir
 	
-	addu	t0, t0, t1
+	subu	t0, t0, 48	/* t0 <- t0 - 48 */
+	sll	t0, t0, 2	/* t0 <- t0 * 4 */ 
+	
+	# ======= multiplicacion por 4
+	#sw	t0, O_LTA_AUX(sp)
+	#j	salir
+
+	lb	t1, 0(t1)	/* t1 <- MEM[t1]: Elemento central */
+	
+	# ======= elemento central
+	#sw	t1, O_LTA_AUX(sp)
+	#j	salir
+	
+	subu	t1, t1, 48	/* t1 <- t1 - 48 */
+	sll	t1, t1, 1	/* t1 <- t1 * 2 */
+	
+	# ======= multiplicacion por 2
+	#sw 	t1, O_LTA_AUX(sp)
+	#j	salir
+
+	lb	t2, 0(t2)	/* t2 <- MEM[t2]: Elemento siguiente */
+	
+	subu	t2, t2, 48	/* t2 <- t2 - 48 */
+
+	# ======= elemento siguiente
+	#sw	t2, O_LTA_AUX(sp)
+	#j	salir
+	
+	addu	t0, t0, t1	/* t0 <- t0 + t1: Anterior + Central */
+	
+	# ======= suma
+	#sw	t0, O_LTA_AUX(sp)
+	#j	salir
+	
 	addu	t0, t0, t2	/* posicion (indice) */
+
+	# ======= suma
+	#sw	t0, O_LTA_AUX(sp)
+	#j 	salir
+
 
 	/* Regla en a3 */
 
 	srlv	t0, a3, t0	/* t0 <- a3 >> lo que indique t0 */
 	
-	andi	v0, t0, 1 	/* v0 <- t0 mod 2 */
+	andi	v0, t0, 1 	/* v0 <- LSB de t0 */
 
 	/* return valor */
 	#lw	v0, O_LTA_AUX(sp)
 
 
+stack_end:
 	/* Stack unwinding */
 	lw	fp, O_FP(sp)
 	lw	gp, O_GP(sp)
