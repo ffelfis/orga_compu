@@ -114,9 +114,9 @@ fin:
 Esto se puede usar como un prólogo. `.cpload t9` carga el `gp`. `.frame fp, SS, ra` describe el Stack Frame, `SS` es el valor usado para extender el Stack para la función.
 
 ```
-.cprestore
+	.cprestore	O_GP
 ```
 
-Causes the assembler to emit the following at the point where it occurs: sw $gp, offset ($sp)
+Hace que el ensamblador emita lo siguiente: `sw gp, OFFSET(sp)`
 
-Also, causes the assembler to generate lw $gp, offset ($sp) after every JAL or BAL operation. Offset should point to the saved register area.
+También hace que el ensamblador genere `lw gp, OFFSET(sp)` después de cada operación de `jal` o `bal`.
